@@ -20,7 +20,12 @@
           {{ userLogged ? 'You are logged in' : 'You are not currently signed in'}}
         </b-alert>
         <b-button @click="logUserOut" v-show="userLogged">Logout</b-button>
-        <b-button :to="{ name: 'auth', params: { action: 'login' } }" v-show="!userLogged">Login</b-button>
+        <b-button
+          :to="{ name: 'auth', params: { action: 'login' } }"
+          v-show="!userLogged"
+        >
+          Login
+        </b-button>
       </b-card>
     </b-col>
   </b-row>

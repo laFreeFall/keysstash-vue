@@ -141,7 +141,7 @@ export default {
               .then(() => {
                 this.$router.push({ name: 'profile' })
               })
-              .catch(error => {
+              .catch((error) => {
                 console.log(error)
               })
           }

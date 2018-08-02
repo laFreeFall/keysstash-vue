@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Header from './components/TheHeader.vue'
 
 export default {
@@ -18,7 +18,14 @@ export default {
 
   methods: {
     ...mapActions([
-      'fetchUser'
+      'fetchUser',
+      'fetchStash'
+    ])
+  },
+
+  computed: {
+    ...mapGetters([
+      'stashLoaded'
     ])
   },
 
@@ -26,6 +33,9 @@ export default {
     const userObj = JSON.parse(window.localStorage.getItem('user'))
     if (userObj !== null) {
       this.fetchUser(userObj)
+      if (!this.stashLoaded) {
+        this.fetchStash()
+      }
     }
   }
 }
