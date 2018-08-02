@@ -25,6 +25,8 @@ router.beforeEach((to, from, next) => {
     } else {
       next({ name: 'auth', params: { action: 'login' } })
     }
+  } else {
+    next()
   }
   if (to.meta.requiresGuest) {
     if (window.localStorage.getItem('user') !== null) {
@@ -34,6 +36,8 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
+  } else {
+    next()
   }
 })
 
