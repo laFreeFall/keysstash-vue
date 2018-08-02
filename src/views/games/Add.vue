@@ -1,10 +1,8 @@
 <template>
-  <div class="about">
-    <b-card header-tag="header">
-      <h4 slot="header" class="text-center">
-        Add new game
-      </h4>
+  <b-card header-tag="header">
+    <h4 slot="header" class="text-center">
+      Add new game
+    </h4>
 
-    </b-card>
-  </div>
+  </b-card>
 </template>

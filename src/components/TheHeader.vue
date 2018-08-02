@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="info" class="mb-3">
+  <b-navbar toggleable="md" type="dark" variant="info" class="mb-3" fixed>
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
     <b-navbar-brand :to="{ name: 'home' }">{{ projectName }}</b-navbar-brand>
@@ -10,6 +10,16 @@
         <b-nav-item :to="{ name: 'keys' }">Keys</b-nav-item>
         <b-nav-item :to="{ name: 'addGame' }">Add Game</b-nav-item>
       </b-navbar-nav>
+
+      <b-nav-form class="mx-auto w-50">
+          <b-form-input
+            type="text"
+            placeholder="Type to filter games..."
+            class=" mx-auto w-50"
+            @input="changeSearchFilter"
+          >
+          </b-form-input>
+      </b-nav-form>
 
       <b-navbar-nav class="ml-auto">
         <template v-if="userLogged">
@@ -32,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -45,6 +55,12 @@ export default {
     ...mapGetters([
       'userData',
       'userLogged'
+    ])
+  },
+
+  methods: {
+    ...mapActions([
+      'changeSearchFilter'
     ])
   }
 };

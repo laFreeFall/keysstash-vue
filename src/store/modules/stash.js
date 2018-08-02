@@ -4,12 +4,18 @@ import { stashSchema } from '../schemas/stash'
 
 const state = {
   stash: [],
-  stashLoaded: false
+  stashLoaded: false,
+  searchFilter: ''
 }
 
 const mutations = {
   FETCH_STASH(state, payload) {
     state.stash = normalize(payload.games, stashSchema)
+    state.stashLoaded = true
+  },
+
+  CHANGE_SEARCH_FILTER(state, filter) {
+    state.searchFilter = filter.trim().toLowerCase()
   }
 }
 
@@ -22,6 +28,10 @@ const actions = {
       .catch((error) => {
         console.log(error)
       })
+  },
+
+  changeSearchFilter({ commit }, eventValue) {
+    commit('CHANGE_SEARCH_FILTER', eventValue)
   }
 }
 
@@ -29,6 +39,8 @@ const getters = {
   stashLoaded: state => state.stashLoaded,
 
   stash: state => state.stash,
+
+  searchFilter: state => state.searchFilter
 }
 
 export default {
