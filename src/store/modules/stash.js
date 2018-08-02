@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { normalize } from 'normalizr'
+import { stashSchema } from '../schemas/stash'
 
 const state = {
   stash: [],
@@ -7,7 +9,7 @@ const state = {
 
 const mutations = {
   FETCH_STASH(state, payload) {
-    state.stash = payload.games
+    state.stash = normalize(payload.games, stashSchema)
   }
 }
 

@@ -6,7 +6,7 @@
       </h4>
       <b-card-group columns>
         <b-card
-          v-for="game in stash"
+          v-for="game in games"
           :key="game.id"
           header-tag="header"
         >
@@ -29,13 +29,18 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import { denormalize } from 'normalizr'
+import { stashSchema } from './../../store/schemas/stash'
 
-  export default {
-    computed: {
-      ...mapGetters([
-        'stash'
-      ])
+export default {
+  computed: {
+    ...mapGetters([
+      'stash'
+    ]),
+    games() {
+      return denormalize(this.stash.result, stashSchema, this.stash.entities)
     }
   }
+}
 </script>
