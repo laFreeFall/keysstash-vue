@@ -1,5 +1,10 @@
 <template>
-  <b-card header-tag="header">
+  <b-card
+    :border-variant="game.keys.length ? 'info' : ''"
+    :header-bg-variant="game.keys.length ? 'info' : 'light'"
+    :header-text-variant="game.keys.length ? 'white' : ''"
+    header-tag="header"
+  >
     <div slot="header" class="text-center">
       {{ game.title }}
     </div>

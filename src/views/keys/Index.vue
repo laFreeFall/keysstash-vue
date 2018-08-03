@@ -16,9 +16,15 @@
     <template v-else>
       <b-alert :show="searchFilter.length" variant="warning" class="text-center">
         There are no games by your request <strong>{{ searchFilter }}</strong>
+        <br>
+        Consider
+        <b-link :to="{ name: 'addGame' }">adding a new game</b-link>
+        if you want to add id to the stash and manage its keys.
       </b-alert>
       <b-alert :show="!searchFilter.length" varian="info" class="text-center">
         You haven't stored keys in your stash yet.
+        <b-link :to="{ name: 'addGame' }">Add games</b-link>
+        to start managing your virtual stash.
       </b-alert>
     </template>
   </b-card>

@@ -3,12 +3,16 @@ import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueClipboard from 'vue-clipboard2'
+import Notification from 'vue-notification'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
+Vue.use(VueClipboard)
+Vue.use(Notification)
 
 axios.defaults.baseURL = 'http://keysstash-laravel'
 let tokenData = JSON.parse(window.localStorage.getItem('user'))

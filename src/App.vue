@@ -4,6 +4,7 @@
     <b-container>
       <router-view></router-view>
     </b-container>
+    <notifications position="bottom right" classes="larger"></notifications>
   </div>
 </template>
 
@@ -40,3 +41,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import 'assets/styles/notification';
+</style>

@@ -13,7 +13,7 @@
 
       <b-nav-form class="mx-auto w-50">
           <b-form-input
-            type="text"
+            type="search"
             placeholder="Type to filter games..."
             class=" mx-auto w-50"
             @input="changeSearchFilter"
