@@ -16,6 +16,10 @@ const mutations = {
 
   CHANGE_SEARCH_FILTER(state, filter) {
     state.searchFilter = filter.trim().toLowerCase()
+  },
+
+  TOGGLE_KEY_USED_STATUS(state, payload) {
+    state.stash.entities.keys[payload.id].used = payload.value
   }
 }
 
@@ -24,14 +28,32 @@ const actions = {
     return axios.get('/api/games')
       .then((response) => {
         commit('FETCH_STASH', response.data)
+        return response.status
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
+        return Promise.reject(error)
       })
   },
 
   changeSearchFilter({ commit }, eventValue) {
     commit('CHANGE_SEARCH_FILTER', eventValue)
+  },
+
+  toggleKeyUsedStatus({ commit }, payload) {
+    const requestType = payload.used ? 'delete' : 'post'
+    return axios[requestType](`/api/keys/${payload.id}/use`)
+      .then((response) => {
+        commit('TOGGLE_KEY_USED_STATUS', {
+          id: payload.id,
+          value: response.data.value
+        })
+        return response.data.value
+      })
+      .catch((error) => {
+        console.error(error)
+        return Promise.reject(error)
+      })
   }
 }
 

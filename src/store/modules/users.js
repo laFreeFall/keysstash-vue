@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const state = {
   clientId: 2,
-  clientSecret: 'AGKVSZ09OD01E4StnNWhJ6BOGYAHI2QivPDPYsoG',
+  clientSecret: 'xP8dJHwpghMK29EqDZ3yAHZcJeBXquj93Be0W0HI',
   user: {
     auth: {},
     data: {}
