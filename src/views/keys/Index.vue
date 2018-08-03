@@ -3,27 +3,24 @@
     <h4 slot="header" class="text-center">
       Keys stash
     </h4>
-    Filter value: {{ searchFilter }}
-    <b-card-group columns>
-      <b-card
-        v-for="game in filteredStash"
-        :key="game.id"
-        header-tag="header"
-      >
-        <div slot="header" class="text-center">
-            {{ game.title }}
-        </div>
-        <b-list-group>
-          <b-list-group-item
-            v-for="key in game.keys"
-            :key="key.id"
-            class="text-center"
-          >
-            {{ key.body }}
-          </b-list-group-item>
-        </b-list-group>
-      </b-card>
-    </b-card-group>
+    <template v-if="filteredStash.length">
+      <b-card-group columns>
+        <app-game-card
+          v-for="game in filteredStash"
+          :key="game.id"
+          :game="game"
+        >
+        </app-game-card>
+      </b-card-group>
+    </template>
+    <template v-else>
+      <b-alert :show="searchFilter.length" variant="warning" class="text-center">
+        There are no games by your request <strong>{{ searchFilter }}</strong>
+      </b-alert>
+      <b-alert :show="!searchFilter.length" varian="info" class="text-center">
+        You haven't stored keys in your stash yet.
+      </b-alert>
+    </template>
   </b-card>
 </template>
 
@@ -31,8 +28,12 @@
 import { mapGetters } from 'vuex'
 import { denormalize } from 'normalizr'
 import { stashSchema } from './../../store/schemas/stash'
+import GameCard from './../../components/Stash/GameCard.vue'
 
 export default {
+  components: {
+    'app-game-card': GameCard
+  },
   computed: {
     ...mapGetters([
       'stash',
