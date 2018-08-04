@@ -1,5 +1,14 @@
 <template>
-    <b-list-group-item class="text-center d-flex justify-content-between">
+    <b-list-group-item class="text-center d-flex justify-content-between" v-show="shown">
+      <b-button
+        size="sm"
+        variant="outline-info"
+        v-clipboard:copy="gameKey.body"
+        @click="toggleKeyUse"
+      >
+        <icon :name="gameKey.used ? 'toggle-on' : 'toggle-off'"></icon>
+      </b-button>
+      {{ gameKey.body }}
       <b-button
         size="sm"
         variant="outline-info"
@@ -8,15 +17,6 @@
         v-clipboard:error="onCopyError"
       >
         <icon name="copy"></icon>
-      </b-button>
-      {{ gameKey.body }}
-      <b-button
-        size="sm"
-        variant="outline-info"
-        v-clipboard:copy="gameKey.body"
-        @click="toggleKeyUse"
-      >
-        <icon :name="gameKey.used ? 'toggle-on' : 'toggle-off'"></icon>
       </b-button>
     </b-list-group-item>
 </template>
@@ -32,6 +32,10 @@ export default {
   props: {
     gameKey: {
       type: Object,
+      required: true
+    },
+    shown: {
+      type: Boolean,
       required: true
     }
   },
