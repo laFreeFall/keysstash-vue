@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueClipboard from 'vue-clipboard2'
 import Notification from 'vue-notification'
+import Vuelidate from 'vuelidate'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -13,6 +14,7 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueClipboard)
 Vue.use(Notification)
+Vue.use(Vuelidate)
 
 axios.defaults.baseURL = 'http://keysstash-laravel'
 let tokenData = JSON.parse(window.localStorage.getItem('user'))

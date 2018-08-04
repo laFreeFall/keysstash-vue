@@ -65,7 +65,6 @@ export default {
       const keyStatus = !this.gameKey.used ? 'used' : 'new'
       this.toggleKeyUsedStatus(this.gameKey)
         .then(() => {
-          console.log('component OK')
           this.$notify({
             type: 'success',
             title: 'Using key',
@@ -73,7 +72,6 @@ export default {
           })
         })
         .catch(() => {
-          console.log('component NOT OK')
           this.$notify({
             type: 'error',
             title: 'Using key',

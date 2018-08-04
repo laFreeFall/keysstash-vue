@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import axios from 'axios'
 import { normalize } from 'normalizr'
 import { stashSchema } from '../schemas/stash'
@@ -20,6 +21,11 @@ const mutations = {
 
   TOGGLE_KEY_USED_STATUS(state, payload) {
     state.stash.entities.keys[payload.id].used = payload.value
+  },
+
+  ADD_KEY(state, payload) {
+    state.stash.entities.games[payload.game_id].keys.push(payload.id)
+    Vue.set(state.stash.entities.keys, payload.id, payload)
   }
 }
 
@@ -49,6 +55,18 @@ const actions = {
           value: response.data.value
         })
         return response.data.value
+      })
+      .catch((error) => {
+        console.error(error)
+        return Promise.reject(error)
+      })
+  },
+
+  addKey({ commit }, payload) {
+    return axios.post(`/api/games/${payload.game_id}/keys`, payload)
+      .then((response) => {
+        commit('ADD_KEY', response.data.key)
+        return response.data.key
       })
       .catch((error) => {
         console.error(error)
