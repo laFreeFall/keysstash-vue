@@ -136,7 +136,7 @@ export default {
 
   computed: {
     steamPlatform() {
-      return this.game.steam_id !== null
+      return this.game.steam_id === null
     },
 
     hiddenKeysAmount() {

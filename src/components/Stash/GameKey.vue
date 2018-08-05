@@ -8,7 +8,7 @@
       >
         <icon :name="gameKey.used ? 'toggle-on' : 'toggle-off'"></icon>
       </b-button>
-      {{ gameKey.body }}
+      <span>{{ gameKey.body }}</span>
       <b-button
         size="sm"
         variant="outline-info"
