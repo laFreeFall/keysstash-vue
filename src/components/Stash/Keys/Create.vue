@@ -3,7 +3,12 @@
     <div role="group">
       <b-input-group>
         <b-input-group-prepend>
-          <b-btn @click="form.used = !form.used" variant="outline-info">
+          <b-btn
+            @click="form.used = !form.used"
+            variant="outline-info"
+            title="Toggle key status"
+            v-b-tooltip.hover
+          >
             <icon :name="form.used ? 'toggle-on' : 'toggle-off'"></icon>
           </b-btn>
         </b-input-group-prepend>

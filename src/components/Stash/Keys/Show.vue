@@ -5,6 +5,8 @@
         variant="outline-info"
         v-clipboard:copy="gameKey.body"
         @click="toggleKeyUse"
+        :title="gameKey.used ? 'Check the key as brand new' : 'Check this key as used'"
+        v-b-tooltip.hover
       >
         <icon :name="gameKey.used ? 'toggle-on' : 'toggle-off'"></icon>
       </b-button>
@@ -15,6 +17,8 @@
         v-clipboard:copy="gameKey.body"
         v-clipboard:success="onCopySuccess"
         v-clipboard:error="onCopyError"
+        title="Copy the key to buffer"
+        v-b-tooltip.hover
       >
         <icon name="copy"></icon>
       </b-button>

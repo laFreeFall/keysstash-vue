@@ -20,7 +20,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import GameCard from '../../components/Stash/Games/Card.vue'
+import GameCard from '@/components/Stash/Games/Card.vue'
 
 export default {
   components: {

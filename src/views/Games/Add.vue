@@ -114,9 +114,9 @@
 import vSelect from 'vue-select'
 import debounce from 'debounce'
 import axios from 'axios'
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { required, requiredIf, minLength, minValue, integer, url } from 'vuelidate/lib/validators'
-import CardPreview from '../../components/Stash/Games/CardPreview.vue'
+import CardPreview from '@/components/Stash/Games/CardPreview.vue'
 
 export default {
   components: {
@@ -180,6 +180,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'searchFilter'
+    ]),
+
     showSteamRelatedFields() {
       return this.form.steam && !this.form.deleted
     },
@@ -203,6 +207,12 @@ export default {
       this.form.link = value ? `https://store.steampowered.com/app/${value}` : ''
       this.form.image = value ? `https://steamcdn-a.akamaihd.net/steam/apps/${value}/header.jpg` : ''
     }
+  },
+
+  mounted() {
+    this.$nextTick(function () {
+      this.form.title = this.searchFilter
+    })
   },
 
   methods: {

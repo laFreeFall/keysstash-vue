@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Games from './views/games/Index.vue'
-import Game from './views/games/Show.vue'
-import AddGame from './views/games/Add.vue'
-import Auth from './views/auth/Index.vue'
-import Profile from './views/users/Show.vue'
+import Games from './views/Games/Index.vue'
+import Game from './views/Games/Show.vue'
+import AddGame from './views/Games/Add.vue'
+import Auth from './views/Auth/Index.vue'
+import Profile from './views/Users/Show.vue'
 
 Vue.use(Router)
 

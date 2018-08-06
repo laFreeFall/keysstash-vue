@@ -12,8 +12,9 @@
         v-if="game.steam && game.link"
         :href="game.link"
         :class="game.keys.length ? 'text-white' : 'text-dark'"
-        title="Open game store page in new link"
         target="_blank"
+        title="Open game store page"
+        v-b-tooltip.hover
       >
         <icon
           v-if="game.steam"

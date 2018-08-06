@@ -42,12 +42,12 @@
         There are no games by your request <strong>{{ searchFilter }}</strong>
         <br>
         Consider
-        <b-link :to="{ name: 'addGame' }">adding a new game</b-link>
+        <b-link :to="{ name: 'games.create' }">adding a new game</b-link>
         if you want to add id to the stash and manage its keys.
       </b-alert>
       <b-alert :show="!searchFilter.length" varian="info" class="text-center">
         You haven't stored keys in your stash yet.
-        <b-link :to="{ name: 'addGame' }">Add games</b-link>
+        <b-link :to="{ name: 'games.create' }">Add games</b-link>
         to start managing your virtual stash.
       </b-alert>
     </template>
@@ -57,8 +57,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { denormalize } from 'normalizr'
-import { stashSchema } from '../../store/schemas/stash'
-import GameCard from '../../components/Stash/Games/Card.vue'
+import { stashSchema } from '@/store/schemas/stash'
+import GameCard from '@/components/Stash/Games/Card.vue'
 
 export default {
   components: {

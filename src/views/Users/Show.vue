@@ -19,7 +19,7 @@
         <b-alert show class="mt-3">
           {{ userLogged ? 'You are logged in' : 'You are not currently signed in'}}
         </b-alert>
-        <b-button @click="logUserOut" v-show="userLogged">Logout</b-button>
+        <b-button v-b-modal="'logout-modal'" v-show="userLogged">Logout</b-button>
         <b-button
           :to="{ name: 'auth', params: { action: 'login' } }"
           v-show="!userLogged"

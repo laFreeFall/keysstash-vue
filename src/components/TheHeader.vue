@@ -28,7 +28,7 @@
               <em>{{ userData.name }}</em>
             </template>
             <b-dropdown-item :to="{ name: 'profile' }">Profile</b-dropdown-item>
-            <b-dropdown-item @click="logUserOut">Sign Out</b-dropdown-item>
+            <b-dropdown-item v-b-modal="'logout-modal'">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </template>
         <template v-else>
@@ -38,13 +38,19 @@
       </b-navbar-nav>
 
     </b-collapse>
+    <logout-modal></logout-modal>
   </b-navbar>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import LogoutModal from '@/components/Auth/LogoutModal.vue'
 
 export default {
+  components: {
+    LogoutModal
+  },
+
   data() {
     return {
       projectName: 'KeysStash'
@@ -60,14 +66,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'changeSearchFilter',
-      'logout'
-    ]),
-
-    logUserOut() {
-      this.logout()
-      this.$router.push({ name: 'home' })
-    }
+      'changeSearchFilter'
+    ])
   }
 };
 </script>
