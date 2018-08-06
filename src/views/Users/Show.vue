@@ -50,13 +50,16 @@
             </b-badge>
           </b-list-group-item>
         </b-list-group>
-        <b-button v-b-modal="'logout-modal'" v-show="userLogged">Logout</b-button>
-        <b-button
-          :to="{ name: 'auth', params: { action: 'login' } }"
-          v-show="!userLogged"
-        >
-          Login
-        </b-button>
+
+        <div class="div mt-3">
+          <b-button v-b-modal="'logout-modal'" v-if="userLogged">Logout</b-button>
+          <b-button
+            v-else
+            :to="{ name: 'auth', params: { action: 'login' } }"
+          >
+            Login
+          </b-button>
+        </div>
       </b-card>
     </b-col>
   </b-row>

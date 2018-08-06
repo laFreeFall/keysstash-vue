@@ -6,6 +6,8 @@
     :img-src="imageUrl"
     :img-alt="game.title"
     header-tag="header"
+    class="game-card"
+    :class="{ 'game-card-empty': game.keys.length === 0 }"
   >
     <div slot="header" class="text-center">
       <a
@@ -73,8 +75,8 @@
         </app-game-key>
       </template>
     </b-list-group>
-    <b-alert :show="!game.keys.length" variant="light">
-      There are no keys for this game.
+    <b-alert :show="!game.keys.length" variant="light" class="mb-0 pt-0 text-center">
+      There are no keys for this game...
     </b-alert>
     <app-add-key :game="game"></app-add-key>
   </b-card>
@@ -87,8 +89,8 @@ import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
 import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/caret-down'
-import Key from '../Keys/Show.vue'
-import AddKey from '../Keys/Create.vue'
+import Key from '@/components/Stash/Keys/Show.vue'
+import AddKey from '@/components/Stash/Keys/Create.vue'
 
 export default {
   components: {
@@ -142,3 +144,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.game-card.game-card-empty .card-img {
+  filter: grayscale(100%);
+}
+</style>

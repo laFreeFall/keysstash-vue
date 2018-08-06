@@ -267,9 +267,15 @@ export default {
           filteringStash.result.sort((a, b) =>
             filteringStash.entities.games[a].id - filteringStash.entities.games[b].id)
       }
-      this.keysAmount = Object.keys(filteringStash.entities.keys).length
+      this.updateKeysAmount(Object.keys(filteringStash.entities.keys).length)
 
       return denormalize(filteringStash.result, stashSchema, filteringStash.entities)
+    }
+  },
+
+  methods: {
+    updateKeysAmount(value) {
+      this.keysAmount = value
     }
   }
 }

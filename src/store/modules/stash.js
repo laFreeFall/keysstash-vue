@@ -104,7 +104,7 @@ const getters = {
 
   gamesAmount: state => state.stash.result.length,
 
-  keysAmount: state => Object.keys(state.stash.entities.keys).length
+  keysAmount: state => (state.stash.result.length ? Object.keys(state.stash.entities.keys).length : 0)
 }
 
 export default {

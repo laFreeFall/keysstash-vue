@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const state = {
   clientId: 2,
-  clientSecret: 'oLhYHHoTlLsNWHsNq34mS5DUyVARMqjNvbx1MBbb',
+  clientSecret: 'kQDFKwyDC298EOFzmQSOEPoXzYLtXNd7ClJppylA',
   user: {
     auth: {},
     data: {}
@@ -64,21 +64,22 @@ const actions = {
             return response.data
           })
           .catch((error) => {
+            console.error(error)
             return Promise.reject(error)
           })
       })
       .catch((error) => {
+        console.error(error)
         return Promise.reject(error)
       })
   },
 
-  register(payload) {
+  register({ commit }, payload) {
     return axios.post('/api/register', payload)
-      .then((response) => {
-        console.log(response.data)
-      })
+      .then(response => response.data)
       .catch((error) => {
-        console.log(error)
+        console.error(error)
+        return Promise.reject(error)
       })
   },
 

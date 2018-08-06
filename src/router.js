@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Games from './views/Games/Index.vue'
 import Game from './views/Games/Show.vue'
-import AddGame from './views/Games/Add.vue'
+import AddGame from './views/Games/Create.vue'
 import Auth from './views/Auth/Index.vue'
 import Profile from './views/Users/Show.vue'
 

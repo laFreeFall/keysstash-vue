@@ -42,7 +42,7 @@ import Icon from 'vue-awesome/components/Icon.vue'
 import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
 import { required } from 'vuelidate/lib/validators'
-import { SteamKey, OtherKey } from '../../../validations/keys'
+import { SteamKey, OtherKey } from '@/validations/keys'
 
 export default {
   props: {

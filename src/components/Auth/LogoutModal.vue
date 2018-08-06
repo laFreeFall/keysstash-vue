@@ -32,7 +32,7 @@ export default {
     logUserOut() {
       this.hideModal()
       this.logout()
-      this.$router.push({name: 'home'})
+      this.$router.push({ name: 'home' })
     },
 
     hideModal() {

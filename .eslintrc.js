@@ -19,8 +19,9 @@ module.exports = {
     'no-unused-expressions': 0,
     'max-len': 0,
     'func-names': 0,
-    'space-before-function-paren': 0
-    // 'space-before-function-paren': 'always'
+    'space-before-function-paren': 0,
+    'no-unused-vars': ['error', { 'args': 'after-used' }],
+    'no-confusing-arrow': ['error', { 'allowParens': true }]
   },
   parserOptions: {
     parser: 'babel-eslint'
