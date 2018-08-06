@@ -28,7 +28,7 @@
               <em>{{ userData.name }}</em>
             </template>
             <b-dropdown-item :to="{ name: 'profile' }">Profile</b-dropdown-item>
-            <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+            <b-dropdown-item @click="logUserOut">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </template>
         <template v-else>
