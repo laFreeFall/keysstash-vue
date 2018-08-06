@@ -28,7 +28,7 @@
               <em>{{ userData.name }}</em>
             </template>
             <b-dropdown-item :to="{ name: 'profile' }">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </template>
         <template v-else>
@@ -60,8 +60,14 @@ export default {
 
   methods: {
     ...mapActions([
-      'changeSearchFilter'
-    ])
+      'changeSearchFilter',
+      'logout'
+    ]),
+
+    logUserOut() {
+      this.logout()
+      this.$router.push({ name: 'home' })
+    }
   }
 };
 </script>

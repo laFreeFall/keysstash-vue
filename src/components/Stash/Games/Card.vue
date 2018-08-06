@@ -75,54 +75,24 @@
     <b-alert :show="!game.keys.length" variant="light">
       There are no keys for this game.
     </b-alert>
-    <b-form @submit.prevent="onSubmit">
-      <div role="group">
-        <b-input-group>
-          <b-input-group-prepend>
-            <b-btn @click="form.used = !form.used" variant="outline-info">
-              <icon :name="form.used ? 'toggle-on' : 'toggle-off'"></icon>
-            </b-btn>
-          </b-input-group-prepend>
-          <b-form-input
-            type="text"
-            :placeholder="game.steam ? 'ABCDE-12345-F6G7H' : 'Enter your key...'"
-            v-model="form.body"
-            aria-describedby="keyBodyHelp"
-          >
-          </b-form-input>
-          <b-input-group-append>
-            <b-btn
-              variant="info"
-              type="submit"
-              :disabled="$v.form.$invalid"
-            >
-              Add
-            </b-btn>
-          </b-input-group-append>
-        </b-input-group>
-        <b-form-text id="keyBodyHelp" class="text-center" v-show="game.steam">
-          Key may contain only digits, letters and hyphens
-        </b-form-text>
-      </div>
-    </b-form>
+    <app-add-key :game="game"></app-add-key>
   </b-card>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import Icon from 'vue-awesome/components/Icon.vue'
 import 'vue-awesome/icons/brands/steam'
 import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
 import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/caret-down'
-import { required } from 'vuelidate/lib/validators'
-import { SteamKey, OtherKey } from '../../../validations/keys'
-import Key from './Key.vue'
+import Key from '../Keys/Show.vue'
+import AddKey from '../Keys/Create.vue'
 
 export default {
   components: {
     'app-game-key': Key,
+    'app-add-key': AddKey,
     Icon
   },
 
@@ -139,35 +109,8 @@ export default {
 
   data() {
     return {
-      form: {
-        used: false,
-        body: '',
-        game_id: this.game.id
-      },
       displayKeysAtOnce: 3,
       showHiddenKeys: false
-    }
-  },
-
-  validations() {
-    if (this.game.steam) {
-      return {
-        form: {
-          body: {
-            required,
-            SteamKey
-          }
-        }
-      }
-    } else {
-      return {
-        form: {
-          body: {
-            required,
-            OtherKey
-          }
-        }
-      }
     }
   },
 
@@ -186,35 +129,6 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'addKey'
-    ]),
-    onSubmit() {
-      if (!this.$v.form.$invalid) {
-        this.addKey(this.form)
-          .then(() => {
-            this.$notify({
-              type: 'success',
-              title: 'Adding key',
-              text: `Key ${this.form.body} was successfully added to your stash`
-            })
-          })
-          .catch((error) => {
-            this.$notify({
-              type: 'error',
-              title: 'Adding key',
-              text: error.response.data.errors[Object.keys(error.response.data.errors)[0]][0]
-            })
-          })
-      } else {
-        this.$notify({
-          type: 'warn',
-          title: 'Adding key',
-          text: 'We can\'t add your key at the moment because data is invalid'
-        })
-      }
-    },
-
     isKeyShown(index) {
       if (this.single) {
         return true

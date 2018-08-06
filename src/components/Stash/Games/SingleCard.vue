@@ -73,7 +73,7 @@ import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/caret-down'
 import { required } from 'vuelidate/lib/validators'
 import { SteamKey, OtherKey } from '../../../validations/keys'
-import Key from './Key.vue'
+import Key from '../Keys/Show.vue'
 
 export default {
   components: {

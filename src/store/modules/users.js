@@ -28,9 +28,9 @@ const mutations = {
   },
 
   LOG_OUT(state) {
-    state.user.auth = {}
-    state.user.data = {}
     window.localStorage.removeItem('user')
+    state.user = {}
+    // state.user.data = {}
     state.userLogged = false
   }
 }
@@ -48,7 +48,7 @@ const actions = {
 
     return axios.post('/oauth/token', postData)
       .then((response) => {
-        axios.defaults.headers.common.Authorization = response.data.access_token
+        axios.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`
         commit('FETCH_USER_AUTH', {
           access_token: response.data.access_token,
           refresh_token: response.data.refresh_token
@@ -61,13 +61,14 @@ const actions = {
         return axios.get('/api/user', { headers })
           .then((response) => {
             commit('FETCH_USER_DATA', response.data)
+            return response.data
           })
           .catch((error) => {
-            console.log(error)
+            return Promise.reject(error)
           })
       })
       .catch((error) => {
-        console.log(error)
+        return Promise.reject(error)
       })
   },
 

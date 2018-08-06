@@ -116,7 +116,7 @@ import debounce from 'debounce'
 import axios from 'axios'
 import { mapActions } from 'vuex'
 import { required, requiredIf, minLength, minValue, integer, url } from 'vuelidate/lib/validators'
-import CardPreview from '../../components/Stash/Game/CardPreview.vue'
+import CardPreview from '../../components/Stash/Games/CardPreview.vue'
 
 export default {
   components: {

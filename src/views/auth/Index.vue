@@ -128,7 +128,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'login'
+      'login',
+      'fetchStash'
     ]),
     onSubmit() {
       switch (this.action) {
@@ -139,10 +140,15 @@ export default {
               password: this.formData.password
             })
               .then(() => {
+                this.fetchStash()
                 this.$router.push({ name: 'profile' })
               })
-              .catch((error) => {
-                console.log(error)
+              .catch(() => {
+                this.$notify({
+                  type: 'error',
+                  title: 'Authorization error',
+                  text: 'Error has happened while trying to authorize you. Please, try again.'
+                })
               })
           }
           break

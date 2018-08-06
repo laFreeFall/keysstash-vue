@@ -12,7 +12,7 @@
           <b-list-group-item>
             <strong>Email</strong>: {{ userData.email }}
           </b-list-group-item>
-          <b-list-group-item>
+          <b-list-group-item v-show="userData.created_at">
             <strong>User since </strong>{{ userData.created_at }}
           </b-list-group-item>
         </b-list-group>
