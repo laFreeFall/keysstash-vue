@@ -67,9 +67,6 @@
           </b-button>
         </b-form>
       </b-card>
-      <b-alert show>
-        {{ userLogged ? 'You are logged in' : 'You are not currently signed in'}}
-      </b-alert>
     </b-col>
   </b-row>
 </template>

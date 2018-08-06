@@ -2,6 +2,9 @@
   <b-card header-tag="header" v-if="stashLoaded">
     <h4 slot="header" class="text-center">
       Keys stash
+      <b-badge :variant="keysAmount > 0 ? 'info' : 'secondary'">
+        {{ keysAmount }}
+      </b-badge>
     </h4>
     <div class="d-flex justify-content-around mb-2">
       <b-form-group>
@@ -155,7 +158,8 @@ export default {
           ],
           selected: 'amount-desc'
         }
-      }
+      },
+      keysAmount: ''
     }
   },
 
@@ -263,6 +267,7 @@ export default {
           filteringStash.result.sort((a, b) =>
             filteringStash.entities.games[a].id - filteringStash.entities.games[b].id)
       }
+      this.keysAmount = Object.keys(filteringStash.entities.keys).length
 
       return denormalize(filteringStash.result, stashSchema, filteringStash.entities)
     }

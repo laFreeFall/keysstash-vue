@@ -100,7 +100,11 @@ const getters = {
 
   searchFilter: state => state.searchFilter,
 
-  game: state => id => denormalize(id, gameSchema, state.stash.entities)
+  game: state => id => denormalize(id, gameSchema, state.stash.entities),
+
+  gamesAmount: state => state.stash.result.length,
+
+  keysAmount: state => Object.keys(state.stash.entities.keys).length
 }
 
 export default {
