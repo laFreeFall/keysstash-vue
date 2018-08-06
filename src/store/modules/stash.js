@@ -4,7 +4,7 @@ import { normalize } from 'normalizr'
 import { stashSchema } from '../schemas/stash'
 
 const state = {
-  stash: [],
+  stash: {},
   stashLoaded: false,
   searchFilter: ''
 }
@@ -23,9 +23,15 @@ const mutations = {
     state.stash.entities.keys[payload.id].used = payload.value
   },
 
-  ADD_KEY(state, payload) {
-    state.stash.entities.games[payload.game_id].keys.push(payload.id)
-    Vue.set(state.stash.entities.keys, payload.id, payload)
+  ADD_KEY(state, key) {
+    Vue.set(state.stash.entities.keys, key.id, key)
+    state.stash.entities.games[key.game_id].keys.push(key.id)
+  },
+
+  ADD_GAME(state, game) {
+    Vue.set(game, 'keys', [])
+    Vue.set(state.stash.entities.games, game.id, game)
+    state.stash.result.push(game.id)
   }
 }
 
@@ -72,6 +78,18 @@ const actions = {
         console.error(error)
         return Promise.reject(error)
       })
+  },
+
+  addGame({ commit }, payload) {
+    return axios.post(`/api/games`, payload)
+    .then((response) => {
+      commit('ADD_GAME', response.data.game)
+      return response.data.game
+    })
+    .catch((error) => {
+      console.error(error)
+      return Promise.reject(error)
+    })
   }
 }
 

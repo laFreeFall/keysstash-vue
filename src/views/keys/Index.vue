@@ -61,7 +61,7 @@
 import { mapGetters } from 'vuex'
 import { denormalize } from 'normalizr'
 import { stashSchema } from './../../store/schemas/stash'
-import GameCard from './../../components/Stash/GameCard.vue'
+import GameCard from '../../components/Stash/Game/Card.vue'
 
 export default {
   components: {

@@ -17,7 +17,9 @@ module.exports = {
     'no-param-reassign': 0,
     'no-else-return': 0,
     'no-unused-expressions': 0,
-    'max-len': 0
+    'max-len': 0,
+    'func-names': 0,
+    'space-before-function-paren': 0
     // 'space-before-function-paren': 'always'
   },
   parserOptions: {

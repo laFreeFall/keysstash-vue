@@ -3,11 +3,13 @@
     :border-variant="game.keys.length ? 'info' : ''"
     :header-bg-variant="game.keys.length ? 'info' : 'light'"
     :header-text-variant="game.keys.length ? 'white' : ''"
+    :img-src="imageUrl"
+    :img-alt="game.title"
     header-tag="header"
   >
     <div slot="header" class="text-center">
       <icon
-        v-if="steamPlatform"
+        v-if="game.steam"
         name="brands/steam"
         scale="1.1"
       >
@@ -17,7 +19,7 @@
         {{ game.keys.length}}
       </b-badge>
     </div>
-    <b-list-group>
+    <b-list-group v-show="game.keys.length">
       <template v-for="(key, index) in game.keys">
         <b-list-group-item
           v-if="index === displayKeysAtOnce"
@@ -42,6 +44,9 @@
         </app-game-key>
       </template>
     </b-list-group>
+    <b-alert :show="!game.keys.length" variant="light">
+      There are no keys for this game.
+    </b-alert>
     <b-form @submit.prevent="onSubmit">
       <div role="group">
         <b-input-group>
@@ -52,7 +57,7 @@
           </b-input-group-prepend>
           <b-form-input
             type="text"
-            placeholder="ABCDE-12345-F6G7H"
+            :placeholder="game.steam ? 'ABCDE-12345-F6G7H' : 'Enter your key...'"
             v-model="form.body"
             aria-describedby="keyBodyHelp"
           >
@@ -67,7 +72,7 @@
             </b-btn>
           </b-input-group-append>
         </b-input-group>
-        <b-form-text id="keyBodyHelp" class="text-center" v-show="steamPlatform">
+        <b-form-text id="keyBodyHelp" class="text-center" v-show="game.steam">
           Key may contain only digits, letters and hyphens
         </b-form-text>
       </div>
@@ -84,12 +89,12 @@ import 'vue-awesome/icons/toggle-off'
 import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/caret-down'
 import { required } from 'vuelidate/lib/validators'
-import { SteamKey, OtherKey } from './../../validations/keys'
-import GameKey from './GameKey.vue'
+import { SteamKey, OtherKey } from '../../../validations/keys'
+import Key from './Key.vue'
 
 export default {
   components: {
-    'app-game-key': GameKey,
+    'app-game-key': Key,
     Icon
   },
 
@@ -113,7 +118,7 @@ export default {
   },
 
   validations() {
-    if (this.steamPlatform) {
+    if (this.game.steam) {
       return {
         form: {
           body: {
@@ -135,16 +140,16 @@ export default {
   },
 
   computed: {
-    steamPlatform() {
-      return this.game.steam_id === null
-    },
-
     hiddenKeysAmount() {
       return this.game.keys.length - this.displayKeysAtOnce
     },
 
     hasHiddenKeys() {
       return this.hiddenKeysAmount > 0
+    },
+
+    imageUrl() {
+      return this.game.image || 'https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png'
     }
   },
 
