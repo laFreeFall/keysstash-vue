@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Keys from './views/keys/Index.vue'
+import Games from './views/games/Index.vue'
+import Game from './views/games/Show.vue'
 import AddGame from './views/games/Add.vue'
 import Auth from './views/auth/Index.vue'
 import Profile from './views/users/Show.vue'
@@ -21,18 +22,29 @@ export default new Router({
     },
 
     {
-      path: '/keys',
-      name: 'keys',
-      component: Keys,
+      path: '/games',
+      name: 'games.index',
+      component: Games,
       meta: {
-        title: 'KeysStash :: Keys',
+        title: 'KeysStash :: Games',
         requiresAuth: true
       }
     },
 
     {
+      path: '/game/:id',
+      name: 'games.show',
+      component: Game,
+      props: true,
+      meta: {
+        title: 'KeysStash :: Game',
+        requiresAuth: true,
+      }
+    },
+
+    {
       path: '/games/add',
-      name: 'addGame',
+      name: 'games.create',
       component: AddGame,
       meta: {
         title: 'KeysStash :: Add Game',

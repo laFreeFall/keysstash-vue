@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { normalize } from 'normalizr'
-import { stashSchema } from '../schemas/stash'
+import { normalize, denormalize } from 'normalizr'
+import { gameSchema, stashSchema } from '../schemas/stash'
 
 const state = {
   stash: {},
@@ -81,15 +81,15 @@ const actions = {
   },
 
   addGame({ commit }, payload) {
-    return axios.post(`/api/games`, payload)
-    .then((response) => {
-      commit('ADD_GAME', response.data.game)
-      return response.data.game
-    })
-    .catch((error) => {
-      console.error(error)
-      return Promise.reject(error)
-    })
+    return axios.post('/api/games', payload)
+      .then((response) => {
+        commit('ADD_GAME', response.data.game)
+        return response.data.game
+      })
+      .catch((error) => {
+        console.error(error)
+        return Promise.reject(error)
+      })
   }
 }
 
@@ -98,7 +98,9 @@ const getters = {
 
   stash: state => state.stash,
 
-  searchFilter: state => state.searchFilter
+  searchFilter: state => state.searchFilter,
+
+  game: state => id => denormalize(id, gameSchema, state.stash.entities)
 }
 
 export default {

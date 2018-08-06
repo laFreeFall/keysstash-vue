@@ -8,69 +8,24 @@
     header-tag="header"
   >
     <div slot="header" class="text-center">
-      <a
-        v-if="game.steam && game.link"
-        :href="game.link"
-        :class="game.keys.length ? 'text-white' : 'text-dark'"
-        title="Open game store page in new link"
-        target="_blank"
-      >
-        <icon
-          v-if="game.steam"
-          name="brands/steam"
-          scale="1.1"
-        >
-        </icon>
-      </a>
       <icon
-        v-if="game.steam && !game.link"
+        v-if="game.steam"
         name="brands/steam"
         scale="1.1"
       >
       </icon>
-      &nbsp;
-      <router-link
-        v-if="!single"
-        :to="{
-          name: 'games.show',
-          params: {
-            id: game.id
-          }
-        }"
-        :class="game.keys.length ? 'text-white' : 'text-dark'"
-      >{{ game.title }}</router-link>
-      <span v-else>
-        {{ game.title }}
-      </span>
-      &nbsp;
+      {{ game.title }}
       <b-badge v-show="game.keys.length" variant="light">
         {{ game.keys.length}}
       </b-badge>
     </div>
     <b-list-group v-show="game.keys.length">
-      <template v-for="(key, index) in game.keys">
-        <b-list-group-item
-          v-if="index === displayKeysAtOnce && !single"
-          :key="game.keys.length * 10 + index"
-          @click="showHiddenKeys = !showHiddenKeys"
-          class="text-center cursor-pointer"
-          button
-        >
-          <span v-show="showHiddenKeys">
-            Hide {{ hiddenKeysAmount }} keys
-          </span>
-          <span v-show="!showHiddenKeys">
-            Show {{ hiddenKeysAmount}} more keys
-          </span>
-          <icon :name="showHiddenKeys ? 'caret-up' : 'caret-down'"></icon>
-        </b-list-group-item>
-        <app-game-key
-          :key="key.id"
-          :gameKey="key"
-          :shown="isKeyShown(index)"
-        >
-        </app-game-key>
-      </template>
+      <app-game-key
+        v-for="key in game.keys"
+        :key="key.id"
+        :gameKey="key"
+      >
+      </app-game-key>
     </b-list-group>
     <b-alert :show="!game.keys.length" variant="light">
       There are no keys for this game.
@@ -130,10 +85,6 @@ export default {
     game: {
       type: Object,
       required: true
-    },
-    single: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -216,9 +167,6 @@ export default {
     },
 
     isKeyShown(index) {
-      if (this.single) {
-        return true
-      }
       if (index < this.displayKeysAtOnce) {
         return true
       }

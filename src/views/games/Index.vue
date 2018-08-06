@@ -51,16 +51,13 @@
         to start managing your virtual stash.
       </b-alert>
     </template>
-    <pre>
-      {{ filteredStash }}
-    </pre>
   </b-card>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { denormalize } from 'normalizr'
-import { stashSchema } from './../../store/schemas/stash'
+import { stashSchema } from '../../store/schemas/stash'
 import GameCard from '../../components/Stash/Game/Card.vue'
 
 export default {
@@ -166,7 +163,6 @@ export default {
     ...mapGetters([
       'stash',
       'stashLoaded',
-      'userLogged',
       'searchFilter'
     ]),
     filteredStash() {

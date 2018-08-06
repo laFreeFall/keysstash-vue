@@ -188,7 +188,7 @@ export default {
       if (this.$v.form.image.$invalid) {
         return null
       }
-      if(this.form.image) {
+      if (this.form.image) {
         const http = new XMLHttpRequest()
         http.open('HEAD', this.form.image, false)
         http.send()
@@ -221,7 +221,7 @@ export default {
       // console.log(payload)
       this.addGame(payload)
         .then(() => {
-          this.$router.push({ name: 'keys' })
+          this.$router.push({ name: 'games.index' })
           this.$notify({
             type: 'success',
             title: 'Adding game',
