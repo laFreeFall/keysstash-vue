@@ -7,7 +7,7 @@
     <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav>
-        <b-nav-item :to="{ name: 'games.index' }">Keys</b-nav-item>
+        <b-nav-item :to="{ name: 'games.index' }" exact>Keys</b-nav-item>
         <b-nav-item :to="{ name: 'games.create' }">Add Game</b-nav-item>
       </b-navbar-nav>
 

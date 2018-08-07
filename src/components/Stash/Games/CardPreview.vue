@@ -1,7 +1,7 @@
 <template>
   <b-card
     header-bg-variant="light"
-    :img-src="imageUrl"
+    :img-src="image"
     :img-alt="title"
     header-tag="header"
   >
@@ -23,6 +23,7 @@
 <script>
 import Icon from 'vue-awesome/components/Icon.vue'
 import 'vue-awesome/icons/brands/steam'
+import isUrl from 'is-url'
 
 export default {
   props: {
@@ -35,7 +36,8 @@ export default {
       type: Boolean
     },
     image: {
-      type: String
+      type: String,
+      default: 'https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png'
     }
   },
 
@@ -45,7 +47,16 @@ export default {
 
   computed: {
     imageUrl() {
-      return this.image || 'https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png'
+      const fallbackImage = 'https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png'
+      if (this.image) {
+        const currentImage = this.image
+        if (isUrl(this.image)) {
+          const img = document.createElement('img')
+          img.onload = () => currentImage
+          img.onerror = () => fallbackImage
+        }
+      }
+      return fallbackImage
     }
   }
 }

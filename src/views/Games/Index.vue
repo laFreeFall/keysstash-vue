@@ -1,12 +1,18 @@
 <template>
-  <b-card header-tag="header" v-if="stashLoaded">
+  <b-card header-tag="header">
     <h4 slot="header" class="text-center">
       Keys stash
-      <b-badge :variant="keysAmount > 0 ? 'info' : 'secondary'">
+      <b-badge v-if="stashLoaded" :variant="keysAmount > 0 ? 'info' : 'secondary'">
         {{ keysAmount }}
       </b-badge>
     </h4>
-    <div class="d-flex justify-content-around mb-2">
+    <b-row v-if="!stashLoaded">
+      <b-col cols="4" v-for="i in 6" :key="i">
+        <game-card-loader :keys="3"></game-card-loader>
+      </b-col>
+    </b-row>
+    <div v-else>
+      <div class="d-flex justify-content-around mb-2">
       <b-form-group>
         <b-form-radio-group
           buttons
@@ -30,17 +36,17 @@
       >
       </b-form-select>
     </div>
-    <template v-if="filteredStash.length">
+      <template v-if="filteredStash.length">
       <b-card-group columns>
-        <app-game-card
+        <game-card
           v-for="game in filteredStash"
           :key="game.id"
           :game="game"
         >
-        </app-game-card>
+        </game-card>
       </b-card-group>
     </template>
-    <template v-else>
+      <template v-else>
       <b-alert :show="searchFilter.length" variant="warning" class="text-center">
         There are no games by your request <strong>{{ searchFilter }}</strong>
         <br>
@@ -54,6 +60,7 @@
         to start managing your virtual stash.
       </b-alert>
     </template>
+    </div>
   </b-card>
 </template>
 
@@ -62,10 +69,12 @@ import { mapGetters } from 'vuex'
 import { denormalize } from 'normalizr'
 import { stashSchema } from '@/store/schemas/stash'
 import GameCard from '@/components/Stash/Games/Card.vue'
+import GameCardLoader from '@/loaders/GameCard.vue'
 
 export default {
   components: {
-    'app-game-card': GameCard
+    GameCard,
+    GameCardLoader
   },
 
   data() {
@@ -95,7 +104,9 @@ export default {
               value: 'all'
             }
           ],
-          selected: 'new'
+          title: 'keys',
+          selected: 'all',
+          default: 'all'
         },
         platforms: {
           options: [
@@ -121,7 +132,9 @@ export default {
               value: 'all'
             }
           ],
-          selected: 'steam'
+          title: 'platforms',
+          selected: 'all',
+          default: 'all'
         },
         sort: {
           options: [
@@ -156,7 +169,9 @@ export default {
               value: 'date-desc'
             }
           ],
-          selected: 'amount-desc'
+          title: 'sort',
+          selected: 'amount-desc',
+          default: 'amount-desc'
         }
       },
       keysAmount: ''

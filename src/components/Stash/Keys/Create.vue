@@ -118,7 +118,7 @@ export default {
           text: 'We can\'t add your key at the moment because data is invalid'
         })
       }
-    },
+    }
   }
 }
 </script>

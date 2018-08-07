@@ -99,13 +99,14 @@
         </b-form>
         <div v-show="form.title" class="game-card-preview mt-3 mb-3">
           <h4 class="text-center">Game card preview</h4>
-          <game-card-preview
+          <card-preview
             :title="form.title"
             :steam="form.steam"
-            :image="imageUrl"
-          ></game-card-preview>
+            :image="form.image"
+          ></card-preview>
         </div>
       </b-card>
+      <pre>{{ form }}</pre>
     </b-col>
   </b-row>
 </template>
@@ -121,7 +122,7 @@ import CardPreview from '@/components/Stash/Games/CardPreview.vue'
 export default {
   components: {
     'v-select': vSelect,
-    'game-card-preview': CardPreview
+    CardPreview
   },
 
   data() {
@@ -130,7 +131,7 @@ export default {
         steam: true,
         title: '',
         deleted: false,
-        steam_game_id: '',
+        steam_game_id: null,
         link: '',
         image: ''
       },
@@ -186,19 +187,6 @@ export default {
 
     showSteamRelatedFields() {
       return this.form.steam && !this.form.deleted
-    },
-
-    imageUrl() {
-      if (this.$v.form.image.$invalid) {
-        return null
-      }
-      if (this.form.image) {
-        const http = new XMLHttpRequest()
-        http.open('HEAD', this.form.image, false)
-        http.send()
-        return http.status === 404 ? null : this.form.image
-      }
-      return null
     }
   },
 
@@ -258,8 +246,16 @@ export default {
     }, 300),
 
     optionChosen() {
-      this.form.steam_game_id = this.select.appid || ''
-      this.form.title = this.select.name || ''
+      if (!this.select) {
+        this.form.steam_game_id = null
+        this.form.title = ''
+        this.form.link = ''
+        this.form.image = ''
+      }
+      if (this.select.appid) {
+        this.form.steam_game_id = this.select.appid
+        this.form.title = this.select.name
+      }
     }
   }
 }

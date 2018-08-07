@@ -3,7 +3,7 @@
     :border-variant="game.keys.length ? 'info' : ''"
     :header-bg-variant="game.keys.length ? 'info' : 'light'"
     :header-text-variant="game.keys.length ? 'white' : ''"
-    :img-src="imageUrl"
+    :img-src="game.image"
     :img-alt="game.title"
     header-tag="header"
     class="game-card"
@@ -89,6 +89,7 @@ import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
 import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/caret-down'
+import isUrl from 'is-url'
 import Key from '@/components/Stash/Keys/Show.vue'
 import AddKey from '@/components/Stash/Keys/Create.vue'
 
@@ -124,10 +125,6 @@ export default {
 
     hasHiddenKeys() {
       return this.hiddenKeysAmount > 0
-    },
-
-    imageUrl() {
-      return this.game.image || 'https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png'
     }
   },
 
