@@ -17,13 +17,6 @@ export default {
     'app-header': Header
   },
 
-  methods: {
-    ...mapActions([
-      'fetchUser',
-      'fetchStash'
-    ])
-  },
-
   computed: {
     ...mapGetters([
       'stashLoaded'
@@ -38,6 +31,13 @@ export default {
         this.fetchStash()
       }
     }
+  },
+
+  methods: {
+    ...mapActions([
+      'fetchUser',
+      'fetchStash'
+    ])
   }
 }
 </script>

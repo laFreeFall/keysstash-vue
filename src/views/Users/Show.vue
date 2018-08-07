@@ -84,6 +84,7 @@ export default {
     ...mapActions([
       'logout'
     ]),
+
     logUserOut() {
       this.logout()
       this.$router.push({ name: 'home' })

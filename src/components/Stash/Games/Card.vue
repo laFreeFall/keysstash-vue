@@ -67,18 +67,18 @@
           </span>
           <icon :name="showHiddenKeys ? 'caret-up' : 'caret-down'"></icon>
         </b-list-group-item>
-        <app-game-key
+        <game-key
           :key="key.id"
           :gameKey="key"
           :shown="isKeyShown(index)"
         >
-        </app-game-key>
+        </game-key>
       </template>
     </b-list-group>
     <b-alert :show="!game.keys.length" variant="light" class="mb-0 pt-0 text-center">
       There are no keys for this game...
     </b-alert>
-    <app-add-key :game="game"></app-add-key>
+    <add-key :game="game"></add-key>
   </b-card>
 </template>
 
@@ -89,14 +89,13 @@ import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
 import 'vue-awesome/icons/caret-up'
 import 'vue-awesome/icons/caret-down'
-import isUrl from 'is-url'
-import Key from '@/components/Stash/Keys/Show.vue'
+import GameKey from '@/components/Stash/Keys/Show.vue'
 import AddKey from '@/components/Stash/Keys/Create.vue'
 
 export default {
   components: {
-    'app-game-key': Key,
-    'app-add-key': AddKey,
+    GameKey,
+    AddKey,
     Icon
   },
 
@@ -130,10 +129,7 @@ export default {
 
   methods: {
     isKeyShown(index) {
-      if (this.single) {
-        return true
-      }
-      if (index < this.displayKeysAtOnce) {
+      if (this.single || index < this.displayKeysAtOnce) {
         return true
       }
       return this.showHiddenKeys

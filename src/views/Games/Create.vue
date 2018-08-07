@@ -106,7 +106,6 @@
           ></card-preview>
         </div>
       </b-card>
-      <pre>{{ form }}</pre>
     </b-col>
   </b-row>
 </template>
@@ -160,6 +159,16 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters([
+      'searchFilter'
+    ]),
+
+    showSteamRelatedFields() {
+      return this.form.steam && !this.form.deleted
+    }
+  },
+
   validations: {
     form: {
       title: {
@@ -177,16 +186,6 @@ export default {
       image: {
         url
       }
-    }
-  },
-
-  computed: {
-    ...mapGetters([
-      'searchFilter'
-    ]),
-
-    showSteamRelatedFields() {
-      return this.form.steam && !this.form.deleted
     }
   },
 

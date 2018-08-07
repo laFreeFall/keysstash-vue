@@ -1,7 +1,7 @@
 <template>
   <b-card
     header-bg-variant="light"
-    :img-src="image"
+    :img-src="imageUrl"
     :img-alt="title"
     header-tag="header"
   >
@@ -26,6 +26,10 @@ import 'vue-awesome/icons/brands/steam'
 import isUrl from 'is-url'
 
 export default {
+  components: {
+    Icon
+  },
+
   props: {
     title: {
       required: true,
@@ -39,10 +43,6 @@ export default {
       type: String,
       default: 'https://www.mancinifoods.com/site/wp-content/uploads/2018/05/no-thumbnail.png'
     }
-  },
-
-  components: {
-    Icon
   },
 
   computed: {

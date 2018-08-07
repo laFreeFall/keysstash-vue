@@ -33,6 +33,10 @@ import 'vue-awesome/icons/toggle-on'
 import 'vue-awesome/icons/toggle-off'
 
 export default {
+  components: {
+    Icon
+  },
+
   props: {
     gameKey: {
       type: Object,
@@ -42,10 +46,6 @@ export default {
       type: Boolean,
       required: true
     }
-  },
-
-  components: {
-    Icon
   },
 
   methods: {

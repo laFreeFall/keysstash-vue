@@ -152,6 +152,7 @@ export default {
       'register',
       'fetchStash'
     ]),
+
     onSubmit() {
       switch (this.action) {
         case 'login':

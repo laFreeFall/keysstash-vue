@@ -45,15 +45,15 @@ import { required } from 'vuelidate/lib/validators'
 import { SteamKey, OtherKey } from '@/validations/keys'
 
 export default {
+  components: {
+    Icon
+  },
+
   props: {
     game: {
       type: Object,
       required: true
     }
-  },
-
-  components: {
-    Icon
   },
 
   data() {
