@@ -35,11 +35,9 @@ Download the project
 1. Go to the project folder and install all the dependencies
 `npm install`
 
-2. Do all the necessary backend preparations decribed [here](https://github.com/laFreeFall/keysstash-laravel).
+2. Do all the necessary backend preparations decribed [here](https://github.com/laFreeFall/keysstash-laravel) (pay close attention to 7 and 9, because it affects frontend part (pasting password grant secret and axios baseurl).
 
-3. After installing passport set its `access_token` in `projectname/store/modules/users.js` as a value of `clientSecret`
-
-4. Run a watcher to display your code changes on the fly
+3. Run a watcher to monitor your code changes and show on the fly
 `npm run serve`
 
 If you need to bundle a final file
